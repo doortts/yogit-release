@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <!-- yogit 앱 아이콘. docs/icon-clf-mockup.html 의 B 시안(대문자 Yo + 구름)과 같다.
+       clf 아이콘과 같은 문법: 평평한 청록 판, 굵기 18 손그림 획, (7,6) 밀린 마젠타 판, 지렁이 선.
+       해 자리에는 예전 yogit 아이콘의 구름 배지를 손그림으로 다시 그려 두었다.
+       tool/make-icon.sh 가 macOS iconset(바깥 여백 10%, rx 57)과 Windows ico(꽉 참, rx 28)를 같이 뽑는다. -->
+  <clipPath id="sq"><rect width="256" height="256" rx="57"/></clipPath>
+  <g clip-path="url(#sq)">
+    <rect width="256" height="256" fill="#12a5a0"/>
+    <g fill="none" stroke="#e0457b" stroke-width="18" stroke-linecap="round" transform="translate(7,6)">
+      <path d="M62,64 C74,92 86,108 102,116"/>
+      <path d="M142,60 C130,92 116,108 102,116 C100,142 102,164 100,190"/>
+      <path d="M198,104 C172,98 160,120 166,142 C172,164 198,170 214,154 C228,138 222,108 198,104"/>
+    </g>
+    <g fill="none" stroke="#fdf3d8" stroke-width="18" stroke-linecap="round">
+      <path d="M62,64 C74,92 86,108 102,116"/>
+      <path d="M142,60 C130,92 116,108 102,116 C100,142 102,164 100,190"/>
+      <path d="M198,104 C172,98 160,120 166,142 C172,164 198,170 214,154 C228,138 222,108 198,104"/>
+    </g>
+    <path transform="translate(-8,-18)"
+          d="M186,70 C182,56 198,48 206,58 C210,42 236,44 236,62 C248,62 250,80 236,82 L190,84 C178,84 176,72 186,70 Z"
+          fill="#fdf3d8" stroke="#fdf3d8" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M28,206 q10,-10 20,0 q10,10 20,0 q10,-10 20,0" fill="none"
+          stroke="#fdf3d8" stroke-width="4" stroke-linecap="round" opacity=".85"/>
+    <path d="M30,228 q8,-8 16,0 q8,8 16,0" fill="none"
+          stroke="#241d3d" stroke-width="4" stroke-linecap="round" opacity=".7"/>
+  </g>
+</svg>

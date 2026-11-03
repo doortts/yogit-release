@@ -85,6 +85,9 @@
   .chip { display: inline-block; padding: 1px 9px; border-radius: 5px; border: 1px solid color-mix(in srgb, var(--c, var(--main)) 70%, transparent); color: var(--c, var(--main)); background: color-mix(in srgb, var(--c, var(--main)) 14%, transparent); font: 500 12px/20px var(--mono); }
   .sec h2 { font-size: clamp(30px, 4.2vw, 50px); line-height: 1.15; font-weight: 800; }
   .sec h3 { font-size: clamp(24px, 3vw, 34px); line-height: 1.2; font-weight: 750; }
+  .sec ul.say { list-style: none; padding: 0; margin: 14px 0 0; max-width: none; }
+  .sec ul.say li { position: relative; padding-left: 18px; margin-top: 4px; }
+  .sec ul.say li::before { content: ""; position: absolute; left: 3px; top: .78em; width: 6px; height: 6px; border-radius: 50%; background: var(--c, var(--main)); opacity: .8; }
   .sec .say { color: var(--muted); font-size: 18px; max-width: 640px; margin-top: 14px; }
 
   /* 화면 틀과 연속 장면 */
@@ -174,18 +177,13 @@
   .size .grid { position: absolute; left: var(--who); right: 72px; top: 0; bottom: 0; pointer-events: none; }
   .size .grid span { position: absolute; top: 0; bottom: 0; border-left: 1px solid #2c2c31; font: 400 11px var(--mono); color: var(--dim); padding-left: 5px; white-space: nowrap; }
   .size .grp { position: relative; font: 600 14px var(--sans); color: var(--text); margin: 18px 0 8px; }
+  .size .sub { position: relative; font: 400 12px var(--sans); color: var(--dim); margin: 6px 0 2px; }
   .size .row { position: relative; display: grid; grid-template-columns: var(--who) minmax(0, 1fr); align-items: center; height: 34px; cursor: default; }
   .size .who { font: 400 13px var(--sans); color: var(--muted); }
   .size .lane { position: relative; display: flex; align-items: center; gap: 10px; margin-right: 72px; height: 100%; }
   .size .lane i { display: block; height: 18px; border-radius: 0 4px 4px 0; flex: none; min-width: 4px; }
   .size .lane b { font: 600 14px var(--mono); color: var(--text); white-space: nowrap; }
   .size .row:hover .lane i { filter: brightness(1.15); }
-  .size .stack { display: flex; gap: 2px; flex: none; }
-  .size .stack i:first-child { border-radius: 0; flex: none; }
-  .size .stack i.fade { flex: 1 1 auto; min-width: 0; }
-  .size .stack i.fade, .size .grp-note .fade { opacity: .38; }
-  .size .grp-note { font: 400 12px var(--sans); color: var(--dim); margin-left: 12px; }
-  .size .grp-note .sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; background: var(--muted); margin: 0 5px 0 8px; vertical-align: -1px; }
   .size .tip { position: absolute; z-index: 3; pointer-events: none; background: #2f2f34; border: 1px solid #45454c; color: var(--text); font: 500 13px var(--sans); padding: 6px 10px; border-radius: 6px; opacity: 0; transition: opacity .12s; white-space: nowrap; }
   .size .tip.on { opacity: 1; }
   .size figcaption { margin-top: 16px; font: 400 13px var(--mono); color: var(--dim); }
@@ -259,8 +257,6 @@
     .size .grid { right: 112px; }
     .size .lane { margin-right: 112px; }
     .size .lane b { font-size: 12px; }
-    .size .grp-note { display: block; margin: 4px 0 0; }
-    .size .grp-note .sw:first-child { margin-left: 0; }
     .steps button { min-width: 0; flex-basis: calc(50% - 4px); }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -364,15 +360,19 @@
         <div class="grp">배포 파일 (DMG)</div>
         <div class="row" data-tip="yogit 배포 파일 19.8 MB, GitKraken 의 9%"><span class="who">yogit</span><span class="lane"><i style="width:1.65%;background:var(--s-y)"></i><b>19.8 MB</b></span></div>
         <div class="row" data-tip="GitKraken 배포 파일 219 MB"><span class="who">GitKraken</span><span class="lane"><i style="width:18.25%;background:var(--s-g)"></i><b>219 MB</b></span></div>
-        <div class="grp">설치 후 앱</div>
+        <div class="grp">설치 후 앱 크기</div>
         <div class="row" data-tip="yogit 설치 후 54 MB, GitKraken 의 9%"><span class="who">yogit</span><span class="lane"><i style="width:4.5%;background:var(--s-y)"></i><b>54 MB</b></span></div>
         <div class="row" data-tip="GitKraken 설치 후 630 MB"><span class="who">GitKraken</span><span class="lane"><i style="width:52.5%;background:var(--s-g)"></i><b>630 MB</b></span></div>
-        <div class="grp">점유 메모리 <span class="grp-note"><i class="sw solid"></i>1분 뒤 <i class="sw fade"></i>실행 시작 (10초 뒤)</span></div>
-        <div class="row" data-tip="yogit 점유 메모리 실행 시작 367 MB, 1분 뒤 202 MB. GitKraken 의 26 ~ 32%"><span class="who">yogit</span><span class="lane"><span class="stack" style="width:30.58%"><i style="width:55.04%;background:var(--s-y)"></i><i class="fade" style="background:var(--s-y)"></i></span><b>202 ~ 367 MB</b></span></div>
-        <div class="row" data-tip="GitKraken 점유 메모리 실행 시작 1,136 MB, 1분 뒤 786 MB. 프로세스 8개 합계"><span class="who">GitKraken</span><span class="lane"><span class="stack" style="width:94.67%"><i style="width:69.19%;background:var(--s-g)"></i><i class="fade" style="background:var(--s-g)"></i></span><b>786 ~ 1,136 MB</b></span></div>
+        <div class="grp">점유 메모리</div>
+        <div class="sub">실행 시작 (10초 뒤)</div>
+        <div class="row" data-tip="yogit 실행 시작 메모리 367 MB, GitKraken 의 32%"><span class="who">yogit</span><span class="lane"><i style="width:30.58%;background:var(--s-y)"></i><b>367 MB</b></span></div>
+        <div class="row" data-tip="GitKraken 실행 시작 메모리 1.1 GB, 프로세스 8개 합계"><span class="who">GitKraken</span><span class="lane"><i style="width:94.67%;background:var(--s-g)"></i><b>1.1 GB</b></span></div>
+        <div class="sub">1분 뒤</div>
+        <div class="row" data-tip="yogit 1분 뒤 메모리 202 MB, GitKraken 의 26%"><span class="who">yogit</span><span class="lane"><i style="width:16.83%;background:var(--s-y)"></i><b>202 MB</b></span></div>
+        <div class="row" data-tip="GitKraken 1분 뒤 메모리 786 MB, 프로세스 8개 합계"><span class="who">GitKraken</span><span class="lane"><i style="width:65.5%;background:var(--s-g)"></i><b>786 MB</b></span></div>
         <div class="tip" role="status" aria-live="polite"></div>
       </div>
-      <div class="sr-only"><table><caption>설치 크기</caption><tr><th></th><th>yogit 0.4.4</th><th>GitKraken 12.6.1</th></tr><tr><th>배포 파일 (DMG)</th><td>19.8 MB</td><td>219 MB</td></tr><tr><th>설치 후 앱</th><td>54 MB</td><td>630 MB</td></tr><tr><th>점유 메모리, 실행 시작 (10초 뒤)</th><td>367 MB</td><td>1,136 MB</td></tr><tr><th>점유 메모리, 1분 뒤</th><td>202 MB</td><td>786 MB</td></tr></table></div>
+      <div class="sr-only"><table><caption>설치 크기</caption><tr><th></th><th>yogit 0.4.4</th><th>GitKraken 12.6.1</th></tr><tr><th>배포 파일 (DMG)</th><td>19.8 MB</td><td>219 MB</td></tr><tr><th>설치 후 앱 크기</th><td>54 MB</td><td>630 MB</td></tr><tr><th>점유 메모리, 실행 시작 (10초 뒤)</th><td>367 MB</td><td>1.1 GB</td></tr><tr><th>점유 메모리, 1분 뒤</th><td>202 MB</td><td>786 MB</td></tr></table></div>
       <figcaption>Apple Silicon 용 DMG, /Applications 에 설치된 앱 크기, flutter 저장소를 열고 10초 뒤와 1분 뒤 메모리(footprint, yogit 5회, GitKraken 3회 중앙값, Apple M4 Pro)</figcaption>
     </figure>
   </section>
@@ -382,7 +382,7 @@
     <div class="node">UN</div>
     <div class="meta"><span class="sha">e18a4b7</span><span class="chip">undo</span></div>
     <h3>Git 작업 Undo 지원</h3>
-    <p class="say">원격 작업까지도 되돌릴 수 있습니다. Push 와 Pull 도 <b>Cmd+Z</b> 로 되돌리며 원격에서 사라질 커밋과 실행할 명령을 먼저 보여 줍니다.</p>
+    <ul class="say"><li>원격 작업까지도 되돌릴 수 있습니다.</li><li>Push 와 Pull 도 <b>Cmd+Z</b> 로 되돌리며 원격에서 사라질 커밋과 실행할 명령을 먼저 보여 줍니다.</li></ul>
     <div class="feat seq">
       <div class="shot frames">
         <div class="frame" data-d="2600"><img src="assets/v4/undo-1.jpg" width="2000" height="1188" loading="lazy" alt="Push 직후. 오른쪽 위에 되돌리기 버튼, 아래에 원격까지 되돌리기 안내">
@@ -401,7 +401,7 @@
     <div class="node">AG</div>
     <div class="meta"><span class="sha">3e53fea</span><span class="chip">agent</span></div>
     <h3>저장소가 외부에서 변경되거나 에이전트가 만들어낸 커밋들을 구분해서 보여줍니다</h3>
-    <p class="say">Claude Code 나 Codex 가 다른 worktree 에서 커밋하거나 amend 하면 브랜치별 카드로 바로 알려 줍니다.</p>
+    <ul class="say"><li>Claude Code 나 Codex 가 다른 worktree 에서 커밋하거나 amend 하면 브랜치별 카드로 바로 알려 줍니다.</li></ul>
     <div class="feat seq">
       <div class="shot frames">
         <div class="frame" data-d="1800"><img src="assets/v4/agent-0.jpg" width="2000" height="1188" loading="lazy" alt="에이전트 worktree 세 개가 있는 타임라인"></div>
@@ -420,7 +420,7 @@
     <div class="node">WT</div>
     <div class="meta"><span class="sha">c71d002</span><span class="chip">worktree</span></div>
     <h3>이미 병합이 끝난 Worktree 를 정리해서 추가 디스크 공간을 확보할 수 있게 해줍니다</h3>
-    <p class="say">worktree 마다 차지한 용량이 사이드바에 보입니다. 기준 브랜치에 머지된 브랜치는 squash 머지까지 찾아 한 번에 고르고 worktree 와 함께 지웁니다.</p>
+    <ul class="say"><li>worktree 마다 차지한 용량이 사이드바에 보입니다.</li><li>기준 브랜치에 머지된 브랜치는 squash 머지까지 찾아 한 번에 고르고 worktree 와 함께 지웁니다.</li></ul>
     <div class="split wt">
       <div class="seq" id="wtseq">
         <div class="shot frames">
@@ -469,8 +469,8 @@
   <section class="sec" id="sync" style="--c: var(--blue)">
     <div class="node">SY</div>
     <div class="meta"><span class="sha">91aa3f0</span><span class="chip">auto sync</span></div>
-    <h3>여러 Mac 의 저장소를 자동으로 맞춥니다</h3>
-    <p class="say">저장소마다 켜 두면 upstream 을 fast-forward 로 받고 로컬 커밋은 Push 합니다.</p>
+    <h3>여러 PC의 로컬 저장소를 자동으로 동기화합니다</h3>
+    <ul class="say"><li>저장소마다 켜 두면 upstream 을 fast-forward 로 받고 로컬 커밋은 Push 합니다.</li></ul>
     <div class="split">
       <div class="sync-art">
         <svg viewBox="0 0 520 320" role="img" aria-label="노트북과 데스크톱 사이로 origin 을 거쳐 커밋이 오가는 그림">
@@ -523,7 +523,7 @@
     <div class="node">PR</div>
     <div class="meta"><span class="sha">f3a9be1</span><span class="chip">pull request</span></div>
     <h3>PR 미리 보기</h3>
-    <p class="say">열린 PR 은 리뷰, CI, 충돌 여부를 카드 형태로 미리 볼 수 있습니다.</p>
+    <ul class="say"><li>열린 PR 은 리뷰, CI, 충돌 여부를 카드 형태로 미리 볼 수 있습니다.</li></ul>
     <div class="feat seq">
       <div class="shot frames">
         <div class="frame" data-d="2600"><img src="assets/v4/pr-0.jpg" width="2000" height="1188" loading="lazy" alt="머지 예정 4건 행과 PR #58 카드, 머지 가능, 승인 2/2">
@@ -582,10 +582,8 @@
       <div><dt>git 명령 기록</dt><dd>앱이 실행한 git 명령을 콘솔에서 그대로 확인합니다.</dd></div>
       <div><dt>빠른 열기</dt><dd><kbd>Cmd+E</kbd> 로 저장소와 메뉴 명령을 한 곳에서 찾아 엽니다.</dd></div>
       <div><dt>커밋 프로필</dt><dd>저장소마다 커밋에 쓸 이름과 이메일을 골라 둡니다.</dd></div>
-      <div><dt>GitHub, GitLab, Forgejo</dt><dd>GitHub Enterprise 를 포함해 PR 과 MR 을 같은 방식으로 보여 줍니다.</dd></div>
+      <div><dt>GitHub, GitLab, Codeberg</dt><dd>GitHub Enterprise 를 포함해 PR 과 MR 을 같은 방식으로 보여 줍니다.</dd></div>
       <div><dt>stash 표시</dt><dd>stash 가 사이드바와 타임라인에 함께 보입니다.</dd></div>
-      <div><dt>5개 언어</dt><dd>한국어, English, 日本語, 简体中文, Tiếng Việt. 번역 파일을 직접 넣을 수도 있습니다.</dd></div>
-      <div><dt>자동 업데이트</dt><dd>새 버전을 받아 설치하고 열던 저장소로 다시 엽니다.</dd></div>
     </dl>
   </section>
 

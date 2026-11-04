@@ -294,12 +294,12 @@
 
   <section class="sec hero">
     <div class="node head" aria-hidden="true"></div>
-    <div class="eyebrow">Yogit for macOS</div>
+    <div class="eyebrow" data-win-ko="Yogit for Windows" data-win-en="Yogit for Windows">Yogit for macOS</div>
     <h1 data-en="<span class=&quot;t&quot;>Timeline</span>-based<br>GUI Git client"><span class="t">Timeline</span> 기반<br>GUI Git client</h1>
     <p class="lede" data-en="Branches, commits, worktrees and PRs on one timeline.">브랜치와 커밋, worktree, PR 을 하나의 타임라인에서 볼 수 있습니다.</p>
     <div class="cta">
-      <a class="btn" href="https://github.com/doortts/yogit-release/releases/download/v0.4.8/yogit-v0.4.8_apple-silicon.dmg" data-en="Download for macOS <small>18.8 MB</small>">macOS용 내려받기 <small>18.8 MB</small></a>
-      <span class="req" data-en="macOS 12 or later, Apple Silicon">macOS 12 이상, Apple Silicon</span>
+      <a class="btn" href="https://github.com/doortts/yogit-release/releases/download/v0.4.8/yogit-v0.4.8_apple-silicon.dmg" data-win="https://github.com/doortts/yogit-release/releases/download/v0.4.7/yogit-v0.4.7-windows-setup.exe" data-win-size="17.0 MB" data-en="Download for macOS <small>18.8 MB</small>">macOS용 내려받기 <small>18.8 MB</small></a>
+      <span class="req" data-en="macOS 12 or later, Apple Silicon" data-win-ko="Windows 10 이상, 64비트" data-win-en="Windows 10 or later, 64-bit">macOS 12 이상, Apple Silicon</span>
     </div>
   </section>
 
@@ -605,8 +605,8 @@
     <div class="node"></div>
     <h2>yogit 0.4.8</h2>
     <div class="cta">
-      <a class="btn" href="https://github.com/doortts/yogit-release/releases/download/v0.4.8/yogit-v0.4.8_apple-silicon.dmg" data-en="Download for macOS <small>18.8 MB</small>">macOS용 내려받기 <small>18.8 MB</small></a>
-      <span class="req" data-en="macOS 12 or later, requires Git">macOS 12 이상, Git 필요</span>
+      <a class="btn" href="https://github.com/doortts/yogit-release/releases/download/v0.4.8/yogit-v0.4.8_apple-silicon.dmg" data-win="https://github.com/doortts/yogit-release/releases/download/v0.4.7/yogit-v0.4.7-windows-setup.exe" data-win-size="17.0 MB" data-en="Download for macOS <small>18.8 MB</small>">macOS용 내려받기 <small>18.8 MB</small></a>
+      <span class="req" data-en="macOS 12 or later, requires Git" data-win-ko="Windows 10 이상, Git 필요" data-win-en="Windows 10 or later, requires Git">macOS 12 이상, Git 필요</span>
     </div>
   </section>
 </main>
@@ -620,6 +620,23 @@
 
 <script>
 (() => {
+  // 운영체제: Windows 에서는 큰 내려받기 단추가 Windows 설치 파일을 받는다. 바꾼 문구의
+  // data-en 도 고쳐 두므로 아래 언어 장치보다 먼저 돈다. data-win 은 tool/publish-site.sh 가
+  // 설치 파일이 붙은 가장 최근 릴리스로 채운다
+  const WIN = /Windows/i.test((navigator.userAgentData && navigator.userAgentData.platform) || navigator.userAgent);
+  if (WIN) {
+    for (const a of document.querySelectorAll('a.btn[data-win]')) {
+      const size = `<small>${a.dataset.winSize}</small>`;
+      a.href = a.dataset.win;
+      a.innerHTML = `Windows용 내려받기 ${size}`;
+      a.dataset.en = `Download for Windows ${size}`;
+    }
+    for (const el of document.querySelectorAll('[data-win-ko]')) {
+      el.innerHTML = el.dataset.winKo;
+      el.dataset.en = el.dataset.winEn;
+    }
+  }
+
   // 언어: data-en 이 붙은 요소와 속성을 영어로 바꾼다. 다른 장치보다 먼저 돈다.
   const EN = window.YOGIT_LANG === 'en';
   if (EN) {

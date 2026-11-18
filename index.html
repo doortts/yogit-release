@@ -232,8 +232,9 @@
   .card.wide { grid-column: 1 / -1; }
   .card.wide .txt { padding-bottom: 16px; }
   .card.side { grid-column: 1 / -1; flex-direction: row; }
-  .card.side .txt { flex: 5 1 0; align-self: center; }
-  .card.side .pic { flex: 7 1 0; margin-top: 0; border-top: 0; border-left: 1px solid var(--line); }
+  .card.side .txt { flex: 1 1 0; align-self: center; padding: 28px 32px; }
+  .card.side .pic { flex: 1 1 0; margin-top: 0; border-top: 0; border-left: 1px solid var(--line); }
+  .card.side .pic img { display: block; width: 100%; height: auto; }
   .more { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   .extras { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 28px; margin: 36px 0 0; }
   .extras > div { padding: 16px 0; border-top: 1px solid var(--line); }
@@ -617,7 +618,7 @@
     <div class="more">
       <div class="card side">
         <div class="txt"><h4 data-en="Secret scan before push">Push 전 비밀키 검사</h4><p data-en="Commits about to be pushed are scanned with gitleaks. If an API key or token turns up, the push stops and you see the commit and line.">올라갈 커밋을 gitleaks 로 검사합니다. API 키나 토큰이 보이면 Push 를 멈추고 커밋과 줄을 알려 줍니다.</p></div>
-        <div class="pic"><div class="lens" data-r="0.296,0.33,0.408,0.39"><img src="assets/v4/secret.jpg" width="2000" height="1188" loading="lazy" alt="올라갈 커밋 1개에서 비밀키로 보이는 값 1개를 찾았습니다" data-en-alt="Found 1 likely secret in 1 commit about to be pushed"></div></div>
+        <div class="pic"><img src="assets/v4/secret-dialog.jpg" width="920" height="570" loading="lazy" alt="올라갈 커밋 1개에서 비밀키로 보이는 값 1개를 찾았습니다" data-en-alt="Found 1 likely secret in 1 commit about to be pushed"></div>
       </div>
     </div>
     <dl class="extras">

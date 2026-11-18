@@ -231,6 +231,9 @@
   .card .tools { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
   .card.wide { grid-column: 1 / -1; }
   .card.wide .txt { padding-bottom: 16px; }
+  .card.side { grid-column: 1 / -1; flex-direction: row; }
+  .card.side .txt { flex: 5 1 0; align-self: center; }
+  .card.side .pic { flex: 7 1 0; margin-top: 0; border-top: 0; border-left: 1px solid var(--line); }
   .more { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   .extras { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 28px; margin: 36px 0 0; }
   .extras > div { padding: 16px 0; border-top: 1px solid var(--line); }
@@ -261,6 +264,8 @@
     .split.wt > div:last-child { padding-bottom: 0; }
     .race { grid-template-columns: minmax(0, 1fr); }
     .more { grid-template-columns: minmax(0, 1fr) !important; }
+    .card.side { flex-direction: column; }
+    .card.side .pic { border-left: 0; border-top: 1px solid var(--line); }
     .extras { grid-template-columns: minmax(0, 1fr); }
     .pair { grid-template-columns: minmax(0, 1fr); }
     .top nav > a:not(.btn) { display: none; }
@@ -426,6 +431,27 @@
     </div>
   </section>
 
+  <!-- AI 충돌 해결 -->
+  <section class="sec" id="ai" style="--c: var(--orange)">
+    <div class="node">AI</div>
+    <div class="meta"><span class="sha">13217c7</span><span class="chip">ai conflict</span></div>
+    <h3 data-en="AI resolves conflicts, you review before applying">AI 가 해결한 충돌을 사람이 확인하고 적용합니다</h3>
+    <ul class="say"><li data-en="Resolve conflicts with the AI CLI you already use: Claude Code, Codex CLI, Antigravity CLI or your own. It runs on your existing sign-in, so no API key is needed.">쓰고 있는 AI CLI 로 충돌을 해결합니다. Claude Code, Codex CLI, Antigravity CLI 나 직접 넣은 CLI 를 쓰던 로그인 그대로 써서 API 키가 필요 없습니다.</li><li data-en="For each conflict region the AI explains why each side changed it and recommends a choice. You check every region in the 3-way view of ours, theirs and the result, pick, then apply.">AI 는 충돌 구역마다 양쪽이 왜 바꿨는지 설명하고 추천을 고릅니다. 사람은 ours, theirs, 결과를 나란히 보는 3-way 화면에서 구역마다 확인하고 고른 뒤 적용합니다.</li><li data-en="The work happens in a temporary worktree, so neither branch changes before you apply, and you can undo after. If one tool hits its usage limit, the next one takes over.">작업은 임시 worktree 에서 하므로 적용 전에는 두 브랜치가 바뀌지 않고, 적용한 뒤에도 되돌릴 수 있습니다. 한 도구가 사용 한도에 걸리면 다음 도구가 이어 받습니다.</li></ul>
+    <div class="feat seq">
+      <div class="shot frames">
+        <div class="frame" data-d="2400"><img src="assets/v4/ai-0.jpg" width="2000" height="1188" loading="lazy" alt="feat/query-metrics 를 main 에 머지하는 미리보기에서 src/query/client.ts 충돌. 아래에 AI로 해결 버튼" data-en-alt="A merge preview of feat/query-metrics into main with a conflict in src/query/client.ts and the Resolve with AI button below">
+          <span class="hl" style="left:50%;top:70.6%;width:4.6%;height:3.6%"></span><span class="hl soft" style="left:22%;top:9.4%;width:55%;height:59%"></span></div>
+        <div class="frame" data-d="2000"><img src="assets/v4/ai-1.jpg" width="2000" height="1188" loading="lazy" alt="Claude Code 가 파일 1개를 설명하는 중" data-en-alt="Claude Code is explaining 1 file">
+          <span class="hl" style="left:22.2%;top:76.6%;width:54.6%;height:3.6%"></span></div>
+        <div class="frame" data-d="4200"><img src="assets/v4/ai-2.jpg" width="2000" height="1188" loading="lazy" alt="AI로 충돌 해결 화면. 왼쪽에 구역마다 OURS, THEIRS, 충돌 이유, 추천과 고르는 칩, 오른쪽에 main, feat/query-metrics, 고른 대로 합친 결과를 나란히 놓은 3-way 화면" data-en-alt="The resolve with AI screen. On the left, each region's ours, theirs, why it conflicts and the recommendation with choice chips. On the right, a 3-way view of main, feat/query-metrics and the result merged as chosen">
+          <span class="hl" style="left:0.8%;top:43.8%;width:21.2%;height:35.8%"></span><span class="hl soft" style="left:22.8%;top:5.6%;width:77%;height:88%"></span><span class="hl soft" style="left:89.9%;top:94.8%;width:9.1%;height:4.2%"></span></div>
+        <div class="frame" data-d="2600"><img src="assets/v4/ai-3.jpg" width="2000" height="1188" loading="lazy" alt="적용한 뒤. client.ts 에 해결됨 표시, Claude, 5줄 버림, 되돌리기" data-en-alt="After applying, client.ts is marked resolved with Claude, 5 lines dropped and Undo">
+          <span class="hl" style="left:79.6%;top:58.6%;width:19.2%;height:3.2%"></span></div>
+      </div>
+      <div class="steps"><button type="button" data-en="<b>Conflict</b>Resolve with AI"><b>충돌</b>AI로 해결</button><button type="button" data-en="<b>Claude Code</b>Explains each region"><b>Claude Code</b>구역마다 설명</button><button type="button" data-en="<b>3-way</b>You review and choose"><b>3-way</b>사람이 보고 고름</button><button type="button" data-en="<b>Applied</b>Can be undone"><b>적용</b>되돌리기 가능</button></div>
+    </div>
+  </section>
+
   <!-- 에이전트 커밋 -->
   <section class="sec" id="agent" style="--c: var(--cyan)">
     <div class="node">AG</div>
@@ -450,32 +476,32 @@
     <div class="node">WT</div>
     <div class="meta"><span class="sha">c71d002</span><span class="chip">worktree</span></div>
     <h3 data-en="Cleanup for merged worktrees">이미 병합이 끝난 Worktree 정리 기능</h3>
-    <ul class="say"><li data-en="See how much disk space each worktree uses before you delete it.">Worktree 가 사용 중인 디스크 공간 크기를 보고 지울 수 있습니다.</li><li data-en="Branches merged into the base branch, squash merges included, are found in one go and deleted along with their worktrees.">기준 브랜치에 머지된 브랜치는 squash 머지까지 한 번에 찾아서 worktree 와 함께 지웁니다.</li></ul>
+    <ul class="say"><li data-en="The WORKTREES section in the sidebar shows each worktree's size and share as a bar. Its color says whether it is safe to delete (green), needs a look (yellow) or is in use (gray).">사이드바의 WORKTREES 구역에서 worktree 마다 크기와 차지하는 몫을 막대로 봅니다. 막대 색은 지워도 되는지(초록), 확인이 필요한지(노랑), 사용 중인지(회색)를 알려 줍니다.</li><li data-en="The cleanup tool finds branches merged into the base branch, squash merges included, and sorts them into safe, needs a look and in use. Drag over rows to select them, and see how far each one has got while it deletes.">정리 도구는 기준 브랜치에 머지된 브랜치를 squash 머지까지 찾아 지워도 됨, 확인 필요, 사용 중으로 나눕니다. 줄을 끌어서 고르고, 지우는 동안 줄마다 어디까지 지웠는지 보여 줍니다.</li></ul>
     <div class="split wt">
       <div class="seq" id="wtseq">
         <div class="shot frames">
-          <div class="frame" data-d="2200" data-freed="0"><img src="assets/v4/wt-0.jpg" width="2000" height="1188" loading="lazy" alt="main 에 머지된 agent 브랜치 다섯 개와 각 worktree 크기, 8.6 GB, 4.2 GB, 7.7 GB, 9.7 GB, 14.8 GB" data-en-alt="Five agent branches merged into main with worktree sizes of 8.6, 4.2, 7.7, 9.7 and 14.8 GB">
-            <span class="hl" style="left:2.2%;top:42%;width:16.4%;height:26.4%"></span></div>
-          <div class="frame" data-d="2200" data-freed="0"><img src="assets/v4/wt-1.jpg" width="2000" height="1188" loading="lazy" alt="머지된 브랜치 고르기 버튼으로 다섯 개를 한 번에 고른 상태" data-en-alt="All five selected at once with the select merged branches button">
-            <span class="hl" style="left:16%;top:24%;width:3.2%;height:3.8%"></span><span class="hl soft" style="left:2.2%;top:42%;width:16.4%;height:26.4%"></span></div>
-          <div class="frame" data-d="3000" data-freed="0"><img src="assets/v4/wt-2.jpg" width="2000" height="1188" loading="lazy" alt="브랜치 5개를 삭제할까요. 모두 main 에 머지되어 있어 사라지는 커밋은 없습니다. worktree 5개도 함께 삭제해 45 GB 를 확보합니다" data-en-alt="Delete 5 branches? All are merged into main, so no commits are lost. Their 5 worktrees go too, freeing 45 GB">
-            <span class="hl" style="left:39.1%;top:36.8%;width:21.8%;height:30%"></span></div>
-          <div class="frame" data-d="1500" data-freed="count"><img src="assets/v4/wt-3.jpg" width="2000" height="1188" loading="lazy" alt="브랜치를 지우는 중 3/5" data-en-alt="Deleting branches, 3 of 5">
-            <span class="hl" style="left:19.4%;top:17.8%;width:12%;height:3.8%"></span></div>
-          <div class="frame" data-d="3400" data-freed="45"><img src="assets/v4/wt-4.jpg" width="2000" height="1188" loading="lazy" alt="브랜치 5개 삭제됨, worktree 5개도 삭제. main 저장소는 131 KB" data-en-alt="5 branches and 5 worktrees deleted, main repository now 131 KB">
-            <span class="hl" style="left:78.4%;top:92%;width:21%;height:5.4%"></span><span class="hl soft" style="left:2.2%;top:32.6%;width:16.4%;height:5%"></span></div>
+          <div class="frame" data-d="2600" data-freed="0"><img src="assets/v4/wt-0.jpg" width="2000" height="1188" loading="lazy" alt="사이드바 WORKTREES 구역. worktree 8개, 45 GB. 머지된 agent 브랜치 다섯 개가 초록 막대로 보인다" data-en-alt="The WORKTREES section in the sidebar with 8 worktrees and 45 GB. Five merged agent branches show green bars">
+            <span class="hl" style="left:0.4%;top:18.7%;width:21.4%;height:33.6%"></span><span class="hl soft" style="left:10.6%;top:19.3%;width:5.8%;height:2.8%"></span></div>
+          <div class="frame" data-d="2600" data-freed="0"><img src="assets/v4/wt-1.jpg" width="2000" height="1188" loading="lazy" alt="정리 화면. 지워도 됨 5개 42 GB, 확인 필요 2개 3.2 GB, 사용 중 1개" data-en-alt="The cleanup screen: 5 safe to delete with 42 GB, 2 to check with 3.2 GB, 1 in use">
+            <span class="hl" style="left:22.4%;top:16%;width:77.2%;height:22.8%"></span><span class="hl soft" style="left:22.4%;top:39.6%;width:77.2%;height:15.4%"></span></div>
+          <div class="frame" data-d="2400" data-freed="0"><img src="assets/v4/wt-2.jpg" width="2000" height="1188" loading="lazy" alt="지워도 되는 다섯 개를 고른 상태. 고른 것 5개 삭제, 42 GB" data-en-alt="All five safe ones selected. Delete 5 selected, 42 GB">
+            <span class="hl" style="left:87.8%;top:92.3%;width:11.4%;height:3.2%"></span><span class="hl soft" style="left:22.4%;top:18.6%;width:77.2%;height:20.4%"></span></div>
+          <div class="frame" data-d="1800" data-freed="count"><img src="assets/v4/wt-3.jpg" width="2000" height="1188" loading="lazy" alt="지우는 중, 5개 가운데 2개, 23 GB 확보. 셋째 줄은 브랜치를 지우고 worktree 를 지우는 중" data-en-alt="Deleting 2 of 5 with 23 GB freed. The third row has its branch deleted and its worktree going">
+            <span class="hl" style="left:22.6%;top:10%;width:20%;height:3.4%"></span><span class="hl soft" style="left:22.4%;top:18.8%;width:77.2%;height:22.4%"></span></div>
+          <div class="frame" data-d="3400" data-freed="42"><img src="assets/v4/wt-4.jpg" width="2000" height="1188" loading="lazy" alt="5개 지움, 42 GB 확보. 사이드바에는 확인이 필요한 worktree 둘과 main 만 남았다" data-en-alt="5 deleted, 42 GB freed. Only the two worktrees to check and main are left in the sidebar">
+            <span class="hl" style="left:22.7%;top:16%;width:76.4%;height:5%"></span><span class="hl soft" style="left:0.4%;top:18.7%;width:21.4%;height:20.4%"></span></div>
         </div>
-        <div class="steps"><button type="button" data-en="<b>5</b>Worktrees merged into main"><b>5개</b>main 에 머지된 worktree</button><button type="button" data-en="<b>One click</b>Select merged branches"><b>한 번에</b>머지된 브랜치 고르기</button><button type="button" data-en="<b>45 GB</b>No commits lost"><b>45 GB</b>사라지는 커밋 없음</button><button type="button" data-en="<b>3/5</b>Deleting"><b>3/5</b>지우는 중</button><button type="button" data-en="<b>Done</b>All cleaned up"><b>끝</b>정리 완료</button></div>
+        <div class="steps"><button type="button" data-en="<b>WORKTREES</b>Size and state"><b>WORKTREES</b>크기와 상태</button><button type="button" data-en="<b>Cleanup</b>Sorted by safety"><b>정리 도구</b>세 구역으로 나눔</button><button type="button" data-en="<b>5</b>Select the safe ones"><b>5개</b>지워도 되는 것 고르기</button><button type="button" data-en="<b>2/5</b>Deleting"><b>2/5</b>지우는 중</button><button type="button" data-en="<b>42 GB</b>Cleaned up"><b>42 GB</b>정리 완료</button></div>
       </div>
       <div class="freed-box">
         <div class="lbl" data-en="Space reclaimed">되찾은 공간</div>
         <div id="freed">0.0 GB</div>
         <ul class="wtlist" id="wtlist">
-          <li data-gb="8.6"><span>migrate-query-client</span><b>8.6 GB</b></li>
-          <li data-gb="4.2"><span>a11y-chart-labels</span><b>4.2 GB</b></li>
-          <li data-gb="7.7"><span>perf-trace</span><b>7.7 GB</b></li>
-          <li data-gb="9.7"><span>e2e-video-capture</span><b>9.7 GB</b></li>
-          <li data-gb="14.8"><span>ios-snapshot-tests</span><b>14.8 GB</b></li>
+          <li data-gb="13.8"><span>ios-snapshot-tests</span><b>14 GB</b></li>
+          <li data-gb="9.0"><span>e2e-video-capture</span><b>9.0 GB</b></li>
+          <li data-gb="8.0"><span>migrate-query-client</span><b>8.0 GB</b></li>
+          <li data-gb="7.2"><span>perf-trace</span><b>7.2 GB</b></li>
+          <li data-gb="3.9"><span>a11y-chart-labels</span><b>3.9 GB</b></li>
         </ul>
       </div>
     </div>
@@ -552,21 +578,19 @@
   <!-- PR -->
   <section class="sec" id="pr" style="--c: var(--main)">
     <div class="node">PR</div>
-    <div class="meta"><span class="sha">f3a9be1</span><span class="chip">pull request</span></div>
+    <div class="meta"><span class="sha">627b4c7</span><span class="chip">pull request</span></div>
     <h3 data-en="PR preview">PR 미리 보기</h3>
-    <ul class="say"><li data-en="See review, CI and conflict status of open PRs on cards.">열린 PR 은 리뷰, CI, 충돌 여부를 카드 형태로 미리 볼 수 있습니다.</li></ul>
+    <ul class="say"><li data-en="Pick the pending merges row to see review, CI and conflict status of every open PR on cards.">머지 예정 행을 고르면 열린 PR 마다 리뷰, CI, 충돌 여부를 카드로 보여 줍니다.</li><li data-en="Pick a card and the timeline locks onto that PR. Only the commits the PR sends stay bright, and the commit it branched from is marked with a ring.">카드를 고르면 타임라인이 그 PR 로 잠깁니다. PR 이 보내는 커밋만 밝게 남고, PR 이 갈라져 나온 커밋은 고리로 표시됩니다.</li><li data-en="While it is locked you can look at any commit, then go back to the card with the close button or Esc.">잠긴 동안 다른 커밋을 보다가 닫기 버튼이나 Esc 로 고른 카드에 바로 돌아갑니다.</li></ul>
     <div class="feat seq">
       <div class="shot frames">
-        <div class="frame" data-d="2600"><img src="assets/v4/pr-0.jpg" width="2000" height="1188" loading="lazy" alt="머지 예정 4건 행과 PR #58 카드, 머지 가능, 승인 2/2" data-en-alt="Pending merges row for 4 PRs and the PR #58 card, ready to merge with 2 of 2 approvals">
-          <span class="hl" style="left:20.2%;top:20.6%;width:56.6%;height:3.4%"></span><span class="hl soft" style="left:77.2%;top:13.6%;width:22.6%;height:30.4%"></span></div>
-        <div class="frame" data-d="2200"><img src="assets/v4/pr-1.jpg" width="2000" height="1188" loading="lazy" alt="PR #61 카드, 리뷰 대기" data-en-alt="PR #61 card, awaiting review">
-          <span class="hl" style="left:77.2%;top:13.6%;width:22.6%;height:30.4%"></span></div>
-        <div class="frame" data-d="2200"><img src="assets/v4/pr-2.jpg" width="2000" height="1188" loading="lazy" alt="PR #63 카드, CI 실패" data-en-alt="PR #63 card, CI failing">
-          <span class="hl" style="left:77.2%;top:13.6%;width:22.6%;height:30.4%"></span></div>
-        <div class="frame" data-d="2200"><img src="assets/v4/pr-3.jpg" width="2000" height="1188" loading="lazy" alt="PR #64 카드, 초안" data-en-alt="PR #64 card, draft">
-          <span class="hl" style="left:77.2%;top:13.6%;width:22.6%;height:30.4%"></span></div>
+        <div class="frame" data-d="2800"><img src="assets/v4/pr-0.jpg" width="2000" height="1188" loading="lazy" alt="머지 예정 4건 행과 PR 현황. #58 머지 가능, #61 리뷰 중, #63 CI 실패 카드" data-en-alt="Pending merges row for 4 PRs and the PR status cards: #58 ready to merge, #61 in review, #63 CI failing">
+          <span class="hl" style="left:56.8%;top:15.8%;width:19.9%;height:3%"></span><span class="hl soft" style="left:77.6%;top:9.6%;width:22%;height:86.4%"></span></div>
+        <div class="frame" data-d="3200"><img src="assets/v4/pr-1.jpg" width="2000" height="1188" loading="lazy" alt="#58 카드를 고르자 타임라인 잠김 띠와 붉은 테두리가 생기고 PR 커밋 세 개만 밝게 남았다. 갈라져 나온 커밋 v1.4.0 은 고리로 표시" data-en-alt="Picking the #58 card locks the timeline with a red band and border. Only the PR's three commits stay bright, and v1.4.0, where it branched off, is a ring">
+          <span class="hl" style="left:22%;top:13%;width:55%;height:3.4%"></span><span class="hl soft" style="left:78%;top:28.6%;width:21.2%;height:22.9%"></span><span class="hl soft" style="left:33.8%;top:70.8%;width:2.2%;height:3.6%"></span></div>
+        <div class="frame" data-d="2800"><img src="assets/v4/pr-2.jpg" width="2000" height="1188" loading="lazy" alt="잠긴 채 PR 커밋 98b02fa 를 본다. 미리보기 머리줄의 붉은 닫기 버튼으로 카드에 돌아간다" data-en-alt="Looking at PR commit 98b02fa while locked. The red close button on the preview header goes back to the card">
+          <span class="hl" style="left:95.6%;top:12.6%;width:2.4%;height:3.4%"></span><span class="hl soft" style="left:22%;top:48%;width:55%;height:3.1%"></span></div>
       </div>
-      <div class="steps"><button type="button" data-en="<b>#58</b>Ready to merge"><b>#58</b>머지 가능</button><button type="button" data-en="<b>#61</b>Awaiting review"><b>#61</b>리뷰 대기</button><button type="button" data-en="<b>#63</b>CI failing"><b>#63</b>CI 실패</button><button type="button" data-en="<b>#64</b>Draft"><b>#64</b>초안</button></div>
+      <div class="steps"><button type="button" data-en="<b>4 PRs</b>PR status"><b>4건</b>PR 현황</button><button type="button" data-en="<b>#58</b>Timeline locked"><b>#58</b>타임라인 잠금</button><button type="button" data-en="<b>Esc</b>Back to the card"><b>Esc</b>카드로 돌아가기</button></div>
     </div>
   </section>
 
@@ -591,17 +615,9 @@
     <div class="meta"><span class="sha">8b0c4d3</span><span class="chip" style="--c:#9a9aa2">and more</span></div>
     <h3>And more</h3>
     <div class="more">
-      <div class="card">
+      <div class="card side">
         <div class="txt"><h4 data-en="Secret scan before push">Push 전 비밀키 검사</h4><p data-en="Commits about to be pushed are scanned with gitleaks. If an API key or token turns up, the push stops and you see the commit and line.">올라갈 커밋을 gitleaks 로 검사합니다. API 키나 토큰이 보이면 Push 를 멈추고 커밋과 줄을 알려 줍니다.</p></div>
         <div class="pic"><div class="lens" data-r="0.296,0.33,0.408,0.39"><img src="assets/v4/secret.jpg" width="2000" height="1188" loading="lazy" alt="올라갈 커밋 1개에서 비밀키로 보이는 값 1개를 찾았습니다" data-en-alt="Found 1 likely secret in 1 commit about to be pushed"></div></div>
-      </div>
-      <div class="card">
-        <div class="txt"><h4 data-en="AI conflict resolution">AI 충돌 해결</h4><p data-en="Resolve conflicts with the AI CLI you already use. It runs on your existing sign-in, so no API key is needed, and you review the result before it is applied. If one tool hits its usage limit, the next one takes over.">쓰고 있는 AI CLI 로 충돌을 해결합니다. API 키 없이 쓰던 로그인을 그대로 쓰고 적용 전에 결과를 확인합니다. 한 도구가 사용 한도에 걸리면 다음 도구가 이어 받습니다.</p>
-          <div class="tools"><span>Claude Code</span><span>Codex CLI</span><span>Antigravity CLI</span><span data-en="Your own CLI">직접 넣은 CLI</span></div></div>
-      </div>
-      <div class="card wide">
-        <div class="txt"><h4>3-way diff view</h4><p data-en="Ours, the result and theirs side by side, with connector lines showing where each line of the result came from.">ours, 해결 결과, theirs 세 열을 나란히 놓고 결과의 줄마다 어디서 왔는지 연결선으로 보여 줍니다.</p></div>
-        <div class="pic"><img src="assets/v4/three-way.jpg" width="2000" height="1188" loading="lazy" alt="3-way diff view. 왼쪽 main, 가운데 Claude Code 가 합친 결과, 오른쪽 feat/query-cache. 아래에 줄 출처 범례" data-en-alt="3-way diff view with main on the left, the result merged by Claude Code in the middle and feat/query-cache on the right, with a line origin legend below"></div>
       </div>
     </div>
     <dl class="extras">
@@ -692,11 +708,11 @@
   const setFreed = mode => {
     clearInterval(countTimer);
     if (mode === '0') { freed.textContent = fmtGB(0); wtItems.forEach(li => li.classList.remove('gone')); return; }
-    if (mode === '45') { freed.textContent = '45 GB'; wtItems.forEach(li => li.classList.add('gone')); return; }
+    if (mode === '42') { freed.textContent = '42 GB'; wtItems.forEach(li => li.classList.add('gone')); return; }
     let k = 0, sum = 0;
     wtItems.forEach(li => li.classList.remove('gone'));
     countTimer = setInterval(() => {
-      if (k >= wtItems.length) { clearInterval(countTimer); freed.textContent = '45 GB'; return; }
+      if (k >= wtItems.length) { clearInterval(countTimer); freed.textContent = '42 GB'; return; }
       wtItems[k].classList.add('gone'); sum += +wtItems[k].dataset.gb; k++;
       freed.textContent = fmtGB(sum);
     }, 260);
